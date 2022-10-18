@@ -2,6 +2,7 @@ import "reflect-metadata";
 import {createConnection} from "typeorm";
 import express from 'express';
 import bodyParser from "body-parser";
+import multer from 'multer';
 import BaseRouter from './routes/index';
 import fs from 'fs';
 import { Constants } from './constants';
@@ -13,7 +14,7 @@ createConnection().then(async () => {
     const app = express();
 
     app.use(bodyParser.json());
-
+    app.use(multer({ storage: multer.memoryStorage() }).single("file"));
     app.use('/', BaseRouter);
 
     // set your test device to use http (in Settings->Developer) 

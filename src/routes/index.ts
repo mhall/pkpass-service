@@ -1,6 +1,6 @@
 import { Request, Response, Router } from 'express';
 import { postRegisterDevice, getUpdatablePasses, unregisterDevice } from '../controller/passKitServerController';
-import { createPass, getPass } from '../controller/passController';
+import { createPass, updatePass, getPass } from '../controller/passController';
 
 let router = Router();
 
@@ -9,7 +9,7 @@ router.post('/pass', createPass);
 
 
 /* update a pass */
-router.put('/pass/:passTypeId/:serialNumber', createPass);
+router.patch('/pass/:passTypeId/:serialNumber', updatePass);
 
 
 // Passkit Web Server implementation

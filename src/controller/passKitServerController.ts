@@ -3,6 +3,7 @@ import { getManager } from "typeorm";
 import { Pass } from "../entity/Pass";
 import { Registration } from "../entity/Registration";
 import { getMaxDateFromArray } from '../util/date';
+import { extractToken } from '../util/auth';
 
 const passRepository = () => getManager().getRepository(Pass);
 const registrationRepository = () => getManager().getRepository(Registration);
@@ -14,7 +15,8 @@ const registrationRepository = () => getManager().getRepository(Registration);
 export async function postRegisterDevice(request: Request, response: Response) {
     const pass = await passRepository().findOne({
         passTypeId: request.params.passTypeId,
-        serialNumber: request.params.serialNumber
+	serialNumber: request.params.serialNumber,
+	authenticationToken: extractToken(request)
     });
     if (pass) {
         let registration = await registrationRepository().findOne(
@@ -67,7 +69,8 @@ export async function getUpdatablePasses(request: Request, response: Response) {
 export async function unregisterDevice(request: Request, response: Response) {
     const pass = await passRepository().findOne({
         passTypeId: request.params.passTypeId,
-        serialNumber: request.params.serialNumber
+        serialNumber: request.params.serialNumber,
+	authenticationToken: extractToken(request)
     });
     if (pass) {
         const registration = await registrationRepository().findOne(

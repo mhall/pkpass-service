@@ -15,6 +15,12 @@ export class Pass {
     serialNumber: string;
 
     @Column()
+    authenticationToken: string;
+
+    @Column()
+    hash: string;
+
+    @Column()
     updatedAt: Date;
 
     @OneToMany(type => Registration, registration => registration.pass)
