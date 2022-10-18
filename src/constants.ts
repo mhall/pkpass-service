@@ -1,5 +1,5 @@
 export enum Constants {
-    WEB_SERVICE_URL = 'https://api.haweb.org/passkit',
+    WEB_SERVICE_URL = 'https://passkit.haweb.org',
     CERT_FOLDER = 'certs',
     CERT_EXT = '.crt.pem',
     KEY_EXT = '.key.pem',

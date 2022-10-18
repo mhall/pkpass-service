@@ -99,11 +99,13 @@ export async function updatePass(request: Request, response: Response) {
 
 	const pass = template.createPass();
 
-	if (pass.barcodes && pass.barcodes[0]) {
-	    pass.barcodes[0].message = (request.body.hasOwnProperty("barcodeMessage")) ? request.body.barcodeMessage : "";
+	pass.webServiceURL = Constants.WEB_SERVICE_URL;
+
+	if (pass.barcodes && pass.barcodes[0] && request.body.hasOwnProperty("barcodeMessage")) {
+	    pass.barcodes[0].message = request.body.barcodeMessage;
 	    pass.barcodes[0].altText = (request.body.hasOwnProperty("barcodeAltText")) ? request.body.barcodeAltText : "";
 	}
-	pass.expirationDate = (request.body.hasOwnProperty("expirationDate")) ? request.body.expirationDate : "";
+	if (request.body.hasOwnProperty("expirationDate")) pass.expirationDate = request.body.expirationDate;
 
 	pass.validate();
 

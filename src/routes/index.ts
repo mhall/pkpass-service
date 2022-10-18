@@ -5,11 +5,11 @@ import { createPass, updatePass, getPass } from '../controller/passController';
 let router = Router();
 
 /* create a new pass */
-router.post('/pass', createPass);
+router.post('/admin/pass', createPass);
 
 
 /* update a pass */
-router.patch('/pass/:passTypeId/:serialNumber', updatePass);
+router.patch('/admin/pass/:passTypeId/:serialNumber', updatePass);
 
 
 // Passkit Web Server implementation
